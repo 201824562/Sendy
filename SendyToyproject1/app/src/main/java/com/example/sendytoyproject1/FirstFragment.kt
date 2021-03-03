@@ -6,19 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.naver.maps.geometry.LatLng
+import com.google.android.material.snackbar.Snackbar
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.android.synthetic.main.fragment_first.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FirstFragment :  Fragment(), OnMapReadyCallback {
 
     private lateinit var locationSource : FusedLocationSource
     private lateinit var naverMap: NaverMap
+    var mNow: Long = 0
+    var mDate: Date? = null
+    var mFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,38 +48,55 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
-        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
-                        grantResults)) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )) {
             if (!locationSource.isActivated) { // 권한 거부됨(위치추적 x)
                 naverMap.locationTrackingMode = LocationTrackingMode.None
             }
-            else { //위치가 따라감.(모드 4개중 Follow)
-                naverMap.locationTrackingMode = LocationTrackingMode.Follow
-            }
+                                                //왜 여기서는 위치따라가게 설정안되나? (else면 밑에 넣는 거랑 같지않나..? -> 생명주기 이해 부족?)
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onMapReady(naverMap: NaverMap) {
+    override fun onMapReady(naverMap: NaverMap) {   //이게 oncreated같은 개념 맞나? -> 그래서 여기 버튼 onclick 넣음
         Toast.makeText(context, "지도 준비 완료", Toast.LENGTH_SHORT).show()
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         this.naverMap = naverMap
-        naverMap.locationSource = locationSource
 
-        // 지도상에 마커 표시
+        naverMap.locationSource = locationSource //locationSource!= latitude (따라서 좌표값 얻기 위해서 오버레이가  필요하다.)
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow     //권한 허용시(카메라 따라가게 모드 설정 o)
+
+        // 지도상에 마커 표시(참고자료)
+        /*
         val marker = Marker()
         marker.position = LatLng(37.5670135, 126.9783740)
         marker.map = naverMap
+    }*/
+
+        //플로팅 버튼 -> 데이터 기록용
+        sendButton.setOnClickListener { view ->
+            Snackbar.make(view, "시간 " +getTime() + "과  위치 " + locationSource + "가 출근부에 기록되었습니다.", Snackbar.LENGTH_LONG)
+                .show()
+        }
     }
 
     companion object {//한 클래스의 인스턴트 간 공유데이터
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
     }
 
+    private fun getTime(): String? {
+        mNow = System.currentTimeMillis()
+        mDate = Date(mNow)
+        return mFormat.format(mDate)
+    }
 
 }
