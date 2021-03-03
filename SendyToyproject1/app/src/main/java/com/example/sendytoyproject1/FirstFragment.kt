@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.sendytoyproject1.Data.LocationViewmodel
 import com.google.android.material.snackbar.Snackbar
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
@@ -24,6 +26,9 @@ import java.util.*
 
 
 class FirstFragment :  Fragment(), OnMapReadyCallback {
+
+    //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
+    val viewModel: LocationViewmodel by viewModels()
 
     private lateinit var locationSource : FusedLocationSource
     private lateinit var naverMap: NaverMap
