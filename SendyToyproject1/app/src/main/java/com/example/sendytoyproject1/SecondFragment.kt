@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class SecondFragment: Fragment()  {
+
+    //val viewModel: LocationViewModel by viewModels() //뷰모델을 사용하기 위해 접근
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

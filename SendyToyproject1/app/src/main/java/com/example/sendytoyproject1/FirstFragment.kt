@@ -1,16 +1,22 @@
 package com.example.sendytoyproject1
 
+import android.content.ContentValues.TAG
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.fragment_first.*
 import java.text.SimpleDateFormat
@@ -24,6 +30,10 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     var mNow: Long = 0
     var mDate: Date? = null
     var mFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+    var nowLat : Double = 0.0
+    var nowLng : Double = 0.0
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,21 +81,36 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         this.naverMap = naverMap
-
-        naverMap.locationSource = locationSource //locationSource!= latitude (따라서 좌표값 얻기 위해서 오버레이가  필요하다.)
+        naverMap.locationSource = locationSource // 초기 위치 설정(주의:locationSource!= latitude)
         naverMap.locationTrackingMode = LocationTrackingMode.Follow     //권한 허용시(카메라 따라가게 모드 설정 o)
 
-        // 지도상에 마커 표시(참고자료)
-        /*
-        val marker = Marker()
-        marker.position = LatLng(37.5670135, 126.9783740)
-        marker.map = naverMap
-    }*/
 
-        //플로팅 버튼 -> 데이터 기록용
+        //사용자의 위치가 변경될 경우 호출되는 콜백 메서드
+        naverMap.addOnLocationChangeListener { location ->
+            nowLat = location.latitude
+            nowLng = location.longitude
+        }
+
+
+        //플로팅 버튼 -> 데이터 기록용                             //추가 필요: 이미 등록된 경우 등록되지 않게 해주어야함.
         sendButton.setOnClickListener { view ->
-            Snackbar.make(view, "시간 " +getTime() + "과  위치 " + locationSource + "가 출근부에 기록되었습니다.", Snackbar.LENGTH_LONG)
-                .show()
+
+            var geoCoder = Geocoder(context, Locale.getDefault())
+            var addresslist: List<Address>? =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
+            var address = addresslist?.get(0)?.getAddressLine(0)
+
+            Snackbar.make(
+                view,
+                "시간:" + getTime() + ", 위치:" + ( address.toString()) + "가 출근부에 기록되었습니다.",
+                Snackbar.LENGTH_LONG
+            ).show()
+
+            Log.d(TAG, address.toString())
+
+            // 출근부 위치 -> 지도상에 마커 표시(참고자료)
+            val marker = Marker()
+            marker.position = LatLng(nowLat, nowLng)
+            marker.map = naverMap
         }
     }
 

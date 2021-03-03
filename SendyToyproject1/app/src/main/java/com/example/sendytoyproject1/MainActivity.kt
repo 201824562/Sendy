@@ -17,8 +17,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         NavigationUI.setupWithNavController(main_bottom_navigation, findNavController(R.id.nav_host_fragment))
 
-        //네이버 api 사용 위해서 해시키 등록 필요
-        try {
+
+        //카카오 맵 api 사용 위해서 해시키 등록 필요
+        /*try {
             val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
             val signatures = info.signingInfo.apkContentsSigners
             val md = MessageDigest.getInstance("SHA")
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             }
         } catch(e: Exception) {
             Log.e("name not found", e.toString())
-        }
+        }*/
 
     }
 }
