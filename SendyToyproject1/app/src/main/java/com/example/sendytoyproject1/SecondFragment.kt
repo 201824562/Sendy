@@ -5,14 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sendytoyproject1.Data.LocationViewmodel
+import com.example.sendytoyproject1.databinding.FragmentFirstBinding
 
 class SecondFragment: Fragment()  {
 
-    //val viewModel: LocationViewModel by viewModels() //뷰모델을 사용하기 위해 접근
+    private val viewModel: LocationViewmodel by activityViewModels() //뷰모델을 사용하기 위해 접근
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +25,8 @@ class SecondFragment: Fragment()  {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_second, container, false)
-
+        //val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false)
+        //val rootView : View = binding.root
 
         var location_rv = rootView.findViewById(R.id.recyclerView) as RecyclerView
 
@@ -30,8 +36,11 @@ class SecondFragment: Fragment()  {
 
          )
 
-        location_rv.adapter =Location_RV_Adapter(items)
-        Log.d("items are :", "!!!!!!!$items!!!!!!")
+        viewModel.alllocations?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            var items = viewModel.getItems(it)
+
+            location_rv.adapter =Location_RV_Adapter(items)
+            Log.d("items are :", "!!!!!!!$items!!!!!!")
 
             //클릭리스너 구현시 필요
             /*{
@@ -39,6 +48,10 @@ class SecondFragment: Fragment()  {
             bundle_selectedTea.putString("tea_name", Tea_Item_Data.teaname);
             findNavController().navigate(R.id.action_secondHomeScreen_to_teaInfoFragment, bundle_selectedTea)
             }*/
+
+            location_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        })
 
         return rootView
     }

@@ -8,6 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+
+//앱데이타베이스(룸) -> 서버의 데이터를 가져오는 역할.
+//이번 어플에서는 서버 안써서 필요없음.
+
 @Database(entities = [LocationEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -50,6 +54,7 @@ abstract class AppDatabase : RoomDatabase() {
                 }
             }
         }
+        //이번 어플에서는 서버 안써서 필요없음.
         suspend fun populateDatabase(userDao: LocationDao) {    //서버 데이터 가져오기.
 
             //userDao.deleteAll()

@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
+//다오 -> 서버의 데이터를 관리하는 로직들.(리포지토리에서 서버DB에 접근을 요청할 때 수행할 함수) //흐름이 일방적이다.(구독자 vs 유투버)
+//이번 어플에서는 서버 안써서 필요없음.
+
 @Dao
 interface LocationDao {
 

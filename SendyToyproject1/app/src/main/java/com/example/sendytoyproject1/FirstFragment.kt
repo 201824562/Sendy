@@ -1,5 +1,6 @@
 package com.example.sendytoyproject1
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.location.Address
 import android.location.Geocoder
@@ -9,9 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.example.sendytoyproject1.Data.LocationEntity
 import com.example.sendytoyproject1.Data.LocationViewmodel
+import com.example.sendytoyproject1.databinding.FragmentFirstBinding
 import com.google.android.material.snackbar.Snackbar
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
@@ -27,9 +32,6 @@ import java.util.*
 
 class FirstFragment :  Fragment(), OnMapReadyCallback {
 
-    //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
-    val viewModel: LocationViewmodel by viewModels()
-
     private lateinit var locationSource : FusedLocationSource
     private lateinit var naverMap: NaverMap
     var mNow: Long = 0
@@ -37,15 +39,21 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     var mFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
     var nowLat : Double = 0.0
     var nowLng : Double = 0.0
+    var addresslist: List<Address>? = null
+    var address : String? = null
 
 
+    //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
+    private val viewModel: LocationViewmodel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_first, container, false)
+        //val rootView = inflater.inflate(R.layout.fragment_first, container, false)
+        val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false)
+        val rootView : View = binding.root
 
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?  //코틀린 extension으로 못하려나?
@@ -59,7 +67,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         //FusedLocationSource : 런타임 권한 처리함, 이때 액티비티 혹은 프레그먼트 필요. (생성자에 액티비티나 프래그먼트 객체를 전달하고 권한 요청 코드를 지정해야함.)
         //onRequestPermissionResult()의 결과를 FusedLocationSource의 onRequestPermissionsResult()에 전달함.
 
-        return rootView     //뷰 리턴.
+        return rootView     //뷰 리턴. (==binding.root / 액티비티뷰 리턴)
     }
 
 
@@ -101,8 +109,8 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         sendButton.setOnClickListener { view ->
 
             var geoCoder = Geocoder(context, Locale.getDefault())
-            var addresslist: List<Address>? =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
-            var address = addresslist?.get(0)?.getAddressLine(0)
+            addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
+            address = addresslist?.get(0)?.getAddressLine(0)
 
             Snackbar.make(
                 view,
@@ -112,10 +120,12 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
             Log.d(TAG, address.toString())
 
-            // 출근부 위치 -> 지도상에 마커 표시(참고자료)
+            // 출근부 위치 -> 지도상에 마커 표시
             val marker = Marker()
             marker.position = LatLng(nowLat, nowLng)
             marker.map = naverMap
+
+            SendButtonClick(view)
         }
     }
 
@@ -127,6 +137,16 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         mNow = System.currentTimeMillis()
         mDate = Date(mNow)
         return mFormat.format(mDate)
+    }
+
+    // (데이터바인딩) 플로팅 버튼 온클릭
+
+    fun SendButtonClick(view: View){
+        //Log.d(TAG, "btnClick")
+
+        //버튼 눌렀을 때 로직 짜기! (바인딩 된 데이터를 저장해야함)
+        viewModel.insert(getTime()?.let { LocationEntity(it, address.toString() ) })
+
     }
 
 }
