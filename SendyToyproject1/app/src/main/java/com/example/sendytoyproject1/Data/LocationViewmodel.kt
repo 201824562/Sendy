@@ -5,7 +5,10 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.example.sendytoyproject1.Location_Item_Data
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 //리포지토리의 데이터들을 관리하는 로직.
@@ -13,8 +16,8 @@ import com.example.sendytoyproject1.Location_Item_Data
 class LocationViewmodel(application: Application) : AndroidViewModel(application) {
 
     //서버가 있다면 필요하나, 없어서 리포지토리 사용 X
-    val repository = LocationRepository(application)
-    var alllocations  = repository.getAll()
+    val repository = LocationRepository(AppDatabase.getDatabase(application, viewModelScope))
+    var alllocations  = repository.allLocations
 
     //ObservableField 변수 : Observe되는 변수의 값이 변하는지 동적 체크 -> Observe 해제 필요 O.
     //Livedata 변수 : 변수의 값이 변하는지 동적 체크 -> Observe 해제 필요 X.(자동해제해줌.)           -> 보통 얘를 더 많이 쓴다.
@@ -56,11 +59,10 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
         return items
     }
 
-   fun insert(it: LocationEntity?) {
-        if (it != null) {
-            Log.d(ContentValues.TAG, "들어간 값!!!!: " + it)
-            repository.insert(it) }
+    fun insert(it: LocationEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(it)
     }
+
 
 
 }

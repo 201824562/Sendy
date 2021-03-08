@@ -30,12 +30,6 @@ class SecondFragment: Fragment()  {
 
         var location_rv = rootView.findViewById(R.id.recyclerView) as RecyclerView
 
-        //임의의 데이터 -> 후에 제대로 구현 필요.
-        var items: MutableList<Location_Item_Data> = mutableListOf(
-        Location_Item_Data("2021-03-02", "부산 진구"), Location_Item_Data("2021-03-03", "부산 남구")
-
-         )
-
         viewModel.alllocations?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             var items = viewModel.getItems(it)
 

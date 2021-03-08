@@ -46,6 +46,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
     private val viewModel: LocationViewmodel by activityViewModels()
 
+    //
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -110,6 +111,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
             var geoCoder = Geocoder(context, Locale.getDefault())
             addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
+            Log.d(TAG, addresslist.toString())
             address = addresslist?.get(0)?.getAddressLine(0)
 
             Snackbar.make(
@@ -145,7 +147,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         //Log.d(TAG, "btnClick")
 
         //버튼 눌렀을 때 로직 짜기! (바인딩 된 데이터를 저장해야함)
-        viewModel.insert(getTime()?.let { LocationEntity(it, address.toString() ) })
+        getTime()?.let { LocationEntity(it, address.toString() ) }?.let { viewModel.insert(it) }
 
     }
 

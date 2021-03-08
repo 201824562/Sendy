@@ -1,21 +1,32 @@
 package com.example.sendytoyproject1
 
 
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import android.view.MotionEvent
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
-import java.security.MessageDigest
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
-        NavigationUI.setupWithNavController(main_bottom_navigation, findNavController(R.id.nav_host_fragment))
+
+        initViewPager()
+
+
+        //(안드로이드) onTouch -> onClick -> onLongClick 순서로 이벤트가 발생 / return true->이후 발생하는 리스너 이벤트 수행 X.
+        nav_host_fragment.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                return true
+            }
+        }) //이거 왜 안먹히냐
+
+        //NavigationUI.setupWithNavController(main_bottom_navigation, findNavController(R.id.nav_host_fragment))
 
 
         //카카오 맵 api 사용 위해서 해시키 등록 필요
@@ -35,4 +46,19 @@ class MainActivity : AppCompatActivity() {
         }*/
 
     }
+
+
+    private fun initViewPager(){
+
+        val tabLayoutTextArray = arrayOf("위치", "출근부")
+        val tabLayoutIconList = arrayListOf(R.drawable.first_icon, R.drawable.second_icon)
+        nav_host_fragment.adapter = ViewPagerAdapter(this) //뷰페이저와 뷰페이저어댑터 연결
+        TabLayoutMediator(tab_layout, nav_host_fragment){ tab, position->   //탭레이아웃과 뷰페이저(어댑터) 연결
+            tab.text = tabLayoutTextArray[position]
+            tab.setIcon(tabLayoutIconList[position])
+        }.attach()
+    }
+
+
+
 }
