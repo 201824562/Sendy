@@ -19,7 +19,7 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
 
     //서버가 있다면 필요하나, 없어서 리포지토리 사용 X
     val repository = LocationRepository(AppDatabase.getDatabase(application, viewModelScope))
-    var alllocations  = repository.allLocations
+    var alllocations  = repository.getItems() //same as repository.allLocations
 
     companion object {
         var SelectedItemslist = SparseBooleanArray()
@@ -42,6 +42,10 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
         return this.alllocations
     }*/
 
+    fun getItems() : LiveData<List<LocationEntity>>{
+        return this.alllocations
+    }
+    /*
     fun getItems(locations: List<LocationEntity>): MutableList<Location_Item_Data> {
         var items: MutableList<Location_Item_Data> = mutableListOf()
 
@@ -52,18 +56,22 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
 
                 address?.let {
                     Location_Item_Data(
-                        datetime,
-                        it
+                            datetime,
+                            it
                     )
                 }?.let {
                     items.add(
-                        it
+                            it
                     )
                 }
             }
         }
         return items
     }
+
+    */
+
+
 
     fun insert(it: LocationEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(it)

@@ -12,6 +12,9 @@ data class LocationEntity(
     @ColumnInfo(name="address")
     val address: String?,
 
+    @ColumnInfo(name="clickedValue")
+    var clickedValue: Boolean = false,
+
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 
