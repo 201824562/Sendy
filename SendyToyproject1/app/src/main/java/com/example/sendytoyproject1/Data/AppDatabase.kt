@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 // (룸1)'앱데이타베이스' ==SQLite 객체 -> DB 인터페이스를 생성
 
 
-@Database(entities = [LocationEntity::class], version = 1, exportSchema = false)
+@Database(entities = [LocationEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() { //RoomDatabase 객체를 상속하고 리턴값으로 Dao를 가지는 추상클래스
     abstract fun LocationDao(): LocationDao     //이 객체를 생성하는데, 비용이 많이 들기 때문에 Singleton 패턴으로 1개만 생성되게 해야함.
                                                 //singleton pattern :객체를 하나만 생성하고 이를 어디에서든지 참조할 수 있게 하는 패턴.

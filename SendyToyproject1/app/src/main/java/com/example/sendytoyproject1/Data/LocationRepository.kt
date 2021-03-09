@@ -32,6 +32,9 @@ class LocationRepository(locationdatabase: AppDatabase) {
         }
     }
 
+    fun getItems() : LiveData<List<LocationEntity>>{
+        return allLocations
+    }
 
      fun insert(it: LocationEntity?) {       //만약 이미 있던 것일 경우,,,? (처리필요)
         if (it != null) {

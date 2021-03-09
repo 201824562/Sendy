@@ -25,28 +25,30 @@ class SecondFragment: Fragment()  {
         //val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false)
         //val rootView : View = binding.root
 
+
         var location_rv = rootView.findViewById(R.id.recyclerView) as RecyclerView
+        val adapter = LocationRVAdapter(){
+            
 
-        viewModel.alllocations?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            var items = viewModel.getItems(it)
-
-            location_rv.adapter = LocationRVAdapter(items, viewModel) {
-
-                Toast.makeText(context, "눌러진 아이템 id는 " + it, Toast.LENGTH_SHORT).show()
-
-                //받아온 SelectedItemslist를 어뜨케 프레그먼트로 전해주지
+            Toast.makeText(context, "눌러진 아이템 id는 " + it, Toast.LENGTH_SHORT).show()
 
 
-                var bundle_selected_items = Bundle()
-                //val value = it[0]  //번들로 보내줄 값
-                //bundle_selected_items.putStringArrayList("item_id", value)
-                //findNavController().navigate(레이아웃, bundle_selected_items)
-            }
-            Log.d("items are :", "!!!!!!!$items!!!!!!")
+            //var bundle_selected_items = Bundle()
+            //val value = it[0]  //번들로 보내줄 값
+            //bundle_selected_items.putStringArrayList("item_id", value)
+            //findNavController().navigate(레이아웃, bundle_selected_items)
+        }
 
-            location_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        location_rv.adapter = adapter
+        location_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
+
+        // getItems(), 즉 전체 아이템 리스트에 변화가 생기는 경우를 가져와준다.(관찰함)
+        viewModel.getItems()?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+             //update UI
+            adapter.setLocationItems(it) //바뀐 리스트를 어댑터에 보내서 리뉴얼해줌.
         })
+
 
         return rootView
     }
