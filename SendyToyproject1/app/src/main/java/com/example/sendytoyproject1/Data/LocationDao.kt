@@ -6,8 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-//다오 -> 서버의 데이터를 관리하는 로직들.(리포지토리에서 서버DB에 접근을 요청할 때 수행할 함수) //흐름이 일방적이다.(구독자 vs 유투버)
-//이번 어플에서는 서버 안써서 필요없음.
+//다오 -> 데이터베이스 접근 메소드들 (쿼리들) _직접 작성함.
 
 @Dao
 interface LocationDao {
@@ -19,6 +18,7 @@ interface LocationDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE) //동일한 데이터가 들어오면 받지 않는다. (근데 시간때문에 그럴일 없긴함.)
     fun insert(locationEntity: LocationEntity)
 
-    /*@Query("DELETE FROM user_table")
-    suspend fun deleteAll()*/
+    /* @Query("DELETE FROM location_table")
+    suspend fun delete(locationEntity: LocationEntity) */
+
 }

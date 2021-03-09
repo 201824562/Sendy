@@ -3,8 +3,10 @@ package com.example.sendytoyproject1.Data
 import android.app.Application
 import android.content.ContentValues
 import android.util.Log
+import android.util.SparseBooleanArray
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sendytoyproject1.Location_Item_Data
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +20,10 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
     //서버가 있다면 필요하나, 없어서 리포지토리 사용 X
     val repository = LocationRepository(AppDatabase.getDatabase(application, viewModelScope))
     var alllocations  = repository.allLocations
+
+    companion object {
+        var SelectedItemslist = SparseBooleanArray()
+    }
 
     //ObservableField 변수 : Observe되는 변수의 값이 변하는지 동적 체크 -> Observe 해제 필요 O.
     //Livedata 변수 : 변수의 값이 변하는지 동적 체크 -> Observe 해제 필요 X.(자동해제해줌.)           -> 보통 얘를 더 많이 쓴다.
@@ -63,6 +69,11 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
         repository.insert(it)
     }
 
+    /*
+    fun delete(it: SparseBooleanArray)= viewModelScope.launch(Dispatchers.IO){
+        repository.delete(it)
+    }
+    */
 
 
 }

@@ -19,7 +19,16 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         />
-
+    <!--- 탭으로 하단 네비게이션바 구현하기.
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_bottom_navigation"
+        app:menu="@menu/menu_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:labelVisibilityMode="labeled"
+        />
+        -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

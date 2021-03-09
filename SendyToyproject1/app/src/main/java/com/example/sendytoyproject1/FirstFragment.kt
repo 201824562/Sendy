@@ -32,6 +32,7 @@ import java.util.*
 
 class FirstFragment :  Fragment(), OnMapReadyCallback {
 
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
     private lateinit var locationSource : FusedLocationSource
     private lateinit var naverMap: NaverMap
     var mNow: Long = 0
@@ -53,7 +54,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     ): View? {
         // Inflate the layout for this fragment
         //val rootView = inflater.inflate(R.layout.fragment_first, container, false)
-        val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false)
+        val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false) //뷰->뷰모델
         val rootView : View = binding.root
 
         val fm = childFragmentManager
@@ -131,9 +132,6 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         }
     }
 
-    companion object {//한 클래스의 인스턴트 간 공유데이터
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
-    }
 
     private fun getTime(): String? {
         mNow = System.currentTimeMillis()
@@ -142,7 +140,6 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     }
 
     // (데이터바인딩) 플로팅 버튼 온클릭
-
     fun SendButtonClick(view: View){
         //Log.d(TAG, "btnClick")
 

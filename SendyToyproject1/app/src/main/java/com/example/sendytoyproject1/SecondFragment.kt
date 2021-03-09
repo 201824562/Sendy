@@ -5,15 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sendytoyproject1.Data.LocationViewmodel
-import com.example.sendytoyproject1.databinding.FragmentFirstBinding
 
 class SecondFragment: Fragment()  {
 
@@ -33,15 +30,19 @@ class SecondFragment: Fragment()  {
         viewModel.alllocations?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             var items = viewModel.getItems(it)
 
-            location_rv.adapter =Location_RV_Adapter(items)
-            Log.d("items are :", "!!!!!!!$items!!!!!!")
+            location_rv.adapter = LocationRVAdapter(items, viewModel) {
 
-            //클릭리스너 구현시 필요
-            /*{
-            var bundle_selectedTea = Bundle();
-            bundle_selectedTea.putString("tea_name", Tea_Item_Data.teaname);
-            findNavController().navigate(R.id.action_secondHomeScreen_to_teaInfoFragment, bundle_selectedTea)
-            }*/
+                Toast.makeText(context, "눌러진 아이템 id는 " + it, Toast.LENGTH_SHORT).show()
+
+                //받아온 SelectedItemslist를 어뜨케 프레그먼트로 전해주지
+
+
+                var bundle_selected_items = Bundle()
+                //val value = it[0]  //번들로 보내줄 값
+                //bundle_selected_items.putStringArrayList("item_id", value)
+                //findNavController().navigate(레이아웃, bundle_selected_items)
+            }
+            Log.d("items are :", "!!!!!!!$items!!!!!!")
 
             location_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
