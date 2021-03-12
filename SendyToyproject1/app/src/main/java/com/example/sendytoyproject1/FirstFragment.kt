@@ -32,6 +32,9 @@ import java.util.*
 
 class FirstFragment :  Fragment(), OnMapReadyCallback {
 
+    private val viewModel: LocationViewmodel by viewModels()    //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
+    private lateinit var binding: FragmentFirstBinding
+
     private val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
     private lateinit var locationSource : FusedLocationSource
     private lateinit var naverMap: NaverMap
@@ -44,18 +47,14 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     var address : String? = null
 
 
-    //'by viewModels()' -> (만들어둔) 뷰모델을 사용하기 위해 접근하는 툴
-    private val viewModel: LocationViewmodel by activityViewModels()
-
-    //
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         //val rootView = inflater.inflate(R.layout.fragment_first, container, false)
-        val binding: FragmentFirstBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false) //뷰->뷰모델
-        val rootView : View = binding.root
+        binding  = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_first,  container, false) //뷰->뷰모델
+
 
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?  //코틀린 extension으로 못하려나?
@@ -69,9 +68,15 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         //FusedLocationSource : 런타임 권한 처리함, 이때 액티비티 혹은 프레그먼트 필요. (생성자에 액티비티나 프래그먼트 객체를 전달하고 권한 요청 코드를 지정해야함.)
         //onRequestPermissionResult()의 결과를 FusedLocationSource의 onRequestPermissionsResult()에 전달함.
 
+        val rootView : View = binding.root
         return rootView     //뷰 리턴. (==binding.root / 액티비티뷰 리턴)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        // binding.viewModel = viewModel -> 용도 모르겠음 + 여기서 왜 안되는건지도 모르겠음.
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -144,7 +149,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         //Log.d(TAG, "btnClick")
 
         //버튼 눌렀을 때 로직 짜기! (바인딩 된 데이터를 저장해야함)
-        getTime()?.let { LocationEntity(it, address.toString() ) }?.let { viewModel.insert(it) }
+        getTime()?.let { LocationEntity(it, address.toString() ) }?.let { viewModel.insert(it) }    //이렇게 하는 거 맞는지 질문하기.
 
     }
 

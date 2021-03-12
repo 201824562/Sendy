@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1c8bdc58-07a1-432a-b87d-5b5f40c17381" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SendyToyproject1/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SendyToyproject1/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/LocationItemData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/AppDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationViewmodel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationViewmodel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/FirstFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/FirstFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/LocationRVAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/LocationRVAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Location_Item_Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/layout/fragment_second.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/layout/fragment_second.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/layout/location_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/layout/location_item.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1pbLDqwRY0EGHmcrHem2dHS3cV7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c8bdc58-07a1-432a-b87d-5b5f40c17381" name="Default Changelist" comment="" />
+      <created>1615446726367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615446726367</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -8,7 +8,7 @@ import androidx.room.Query
 
 //다오 -> 데이터베이스 접근 메소드들 (쿼리들) _직접 작성함.
 
-@Dao
+@Dao //DTO
 interface LocationDao {
 
     //시간별 정렬 제대로 되는지 확인 필요
