@@ -53,16 +53,8 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(tabLayoutIconList[position])
         }.attach()
 
-        /*
-        //(안드로이드) onTouch -> onClick -> onLongClick 순서로 이벤트가 발생 / return true->이후 발생하는 리스너 이벤트 수행 X.
-        nav_host_fragment.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                return true
-            }
 
-         })
-         */
-
+        nav_host_fragment.isUserInputEnabled = false
         
     }
 

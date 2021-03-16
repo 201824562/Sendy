@@ -116,8 +116,10 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
         sendButton.setOnClickListener { view ->
 
             var geoCoder = Geocoder(context, Locale.getDefault())
+            Log.d(TAG, "주소 잡히는지 확인" + "$nowLat, " + "$nowLng")
             addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
-            Log.d(TAG, addresslist.toString())
+            Log.d(TAG, " 주소 뭐 들어왔누 : "  +  addresslist.toString())
+
             address = addresslist?.get(0)?.getAddressLine(0)
 
             Snackbar.make(
@@ -128,7 +130,7 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
             Log.d(TAG, address.toString())
 
-            // 출근부 위치 -> 지도상에 마커 표시
+            // 출근부 위치 -> 지도상에 마커 표시 (찍은 것만 뜨게 하자..)  귀찮다..ㅎ
             val marker = Marker()
             marker.position = LatLng(nowLat, nowLng)
             marker.map = naverMap
@@ -146,11 +148,9 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
     // (데이터바인딩) 플로팅 버튼 온클릭
     fun SendButtonClick(view: View){
-        //Log.d(TAG, "btnClick")
-
         //버튼 눌렀을 때 로직 짜기! (바인딩 된 데이터를 저장해야함)
-        getTime()?.let { LocationEntity(it, address.toString() ) }?.let { viewModel.insert(it) }    //이렇게 하는 거 맞는지 질문하기.
-
+        viewModel.insert(LocationItemData(getTime().toString(), address.toString(), 0,false))
     }
+
 
 }

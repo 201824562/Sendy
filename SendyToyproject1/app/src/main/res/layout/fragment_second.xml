@@ -32,6 +32,16 @@
                 android:text="출근부"
                 android:textSize="22dp"
                 android:textStyle="bold" />
+            <!--
+            <Button
+                android:id="@+id/allButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="전체선택"
+                app:layout_constraintRight_toLeftOf="@id/deleteButton" /> -->
             <Button
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
@@ -40,8 +50,7 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:text="삭제"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:layout_editor_absoluteY="8dp" />
+                app:layout_constraintRight_toRightOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ScrollView
