@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import com.google.android.material.appbar.AppBarLayout
 import androidx.viewpager2.adapter.FragmentStateAdapter as FragmentStateAdapter
 
-class ViewPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm){
+class ViewPagerAdapter(fm: FragmentManager, lc:Lifecycle) : FragmentStateAdapter(fm,lc){
 
     override fun getItemCount(): Int = 2 //PagerViewadapter에서 관리할 View 개수를 반환한다.
 

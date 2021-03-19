@@ -2,6 +2,7 @@ package com.example.sendytoyproject1.Data
 
 import android.app.Application
 import android.location.Location
+import android.text.Editable
 import android.util.Log
 import android.util.SparseBooleanArray
 import androidx.fragment.app.viewModels
@@ -18,6 +19,7 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
 
     //서버가 있다면 필요하나, 없어서 리포지토리 사용 X
     private val repository = LocationRepository(AppDatabase.getDatabase(application, viewModelScope))
+
     /*
     private val _alllocations = MutableLiveData<List<LocationItemData>>()
             val alllocations : LiveData<List<LocationItemData>>
@@ -42,14 +44,13 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
     }*/
 
 
- companion object {
-        var SelectedItemslist = SparseBooleanArray()
-    }
 
     fun getItems(): LiveData<List<LocationItemData>> {
         val allitems = repository.getItems() //가져온 친구는  LiveData<List<LocationItemData>>
         return allitems
     }
+
+
 
 
 //        repository.getItems()
@@ -109,21 +110,23 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
         repository.insert(it)
     }
 
-    fun delete() = viewModelScope.launch(Dispatchers.IO){
-        Log.d("LocationViewmodel", "$SelectedItemslist")    //여기서 true인 애만 어뜨케 삭제하지.
-        for (i in (SelectedItemslist.size()-1) downTo 0){
-            var key = SelectedItemslist.keyAt(i) //i는 리스트자체의 인덱스, key는 실제 데이터의 인덱스
-            //Log.d("LocationViewmodel", "모든 i + $key")
-            repository.delete(key)
+    fun insertmemo(id:Int, memo: String?)  = viewModelScope.launch(Dispatchers.IO)  { //이것도 itemData로 받아온 후 Entity형식으로 바꿔야 함.
+        repository.insertmemo(id, memo)
+    }
 
+    fun delete(clickeditemsList : SparseBooleanArray) = viewModelScope.launch(Dispatchers.IO){
+
+        for (i in (clickeditemsList.size()-1) downTo 0){
+            var key = clickeditemsList.keyAt(i) //i는 리스트자체의 인덱스, key는 실제 데이터의 인덱스
+
+            if (clickeditemsList.get(key)) { //true인 값만 삭제하기.
+                Log.d("LocationViewmodel", "모든 i + $key")
+                repository.delete(key)
+            }
         }
     }
 
 
-    fun pushSparseArray(it : SparseBooleanArray) = viewModelScope.launch(Dispatchers.IO){
-        //여기서 받아온 it으로 true인 애 찾아서 delete 해줘야함.
-        SelectedItemslist  = it
-    }
 
 
 }

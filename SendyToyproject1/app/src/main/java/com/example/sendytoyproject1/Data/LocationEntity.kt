@@ -1,5 +1,6 @@
 package com.example.sendytoyproject1.Data
 
+import android.text.Editable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,6 +14,8 @@ data class LocationEntity(
     @ColumnInfo(name="address")
     val address: String?,
 
+    @ColumnInfo(name="memo")
+    val memo: String?,
 
     //클릭여부는 뷰의 데이터이지 앱의 데이터가 X/ 따라서 없는 게 맞다.
     //@ColumnInfo(name="clickedValue")

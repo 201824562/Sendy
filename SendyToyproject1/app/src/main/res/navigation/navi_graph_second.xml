@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi_graph_second.xml"
+    app:startDestination="@+id/SecondContentFragment">
+    <fragment
+        android:id="@+id/SecondContentFragment"
+        android:name="com.example.sendytoyproject1.SecondContentFragment"
+        android:label="content_second"
+        tools:layout="@layout/content_second_home" >
+        <action
+            android:id="@+id/action_secondFragment_to_secondDetailFragment"
+            app:destination="@id/secondDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondDetailFragment"
+        android:name="com.example.sendytoyproject1.SecondDetailFragment"
+        android:label="SecondDetailFragment" >
+        <action
+            android:id="@+id/action_secondDetailFragment_to_SecondContentFragment"
+            app:popUpTo="@id/SecondContentFragment" />
+    </fragment>
+
+</navigation>

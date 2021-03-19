@@ -32,6 +32,17 @@
             android:layout_marginTop="200dp"
             android:layout_marginRight="10dp"
             />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/findlocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@android:drawable/btn_star"
+            app:layout_constraintTop_toBottomOf="@id/sendButton"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

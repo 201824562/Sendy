@@ -1,6 +1,7 @@
 package com.example.sendytoyproject1.Data
 
 import android.location.Location
+import android.text.Editable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -41,14 +42,20 @@ class LocationRepository(locationdatabase: AppDatabase) {
     private fun mappingEntitytoItemdata(it: LocationEntity) : LocationItemData {
         val dateTime = it.datetime
         val address  = it.address.toString()
+        val memo = it.memo.toString()
         val id = it.id
 
-        return (LocationItemData(dateTime, address, id ,false))
+        return (LocationItemData(dateTime, address, memo, id ,false))
     }
 
 
-    fun insert(it: LocationItemData) {       //만약 이미 있던 것일 경우,,,? (처리필요)
-        LocationDao.insert(LocationEntity(it.datetime, it.address))
+    fun insert(it: LocationItemData) {
+        LocationDao.insert(LocationEntity(it.datetime, it.address, it.memo))
+        //Log.d(ContentValues.TAG, "들어간 값" + AllLocations.value.toString())
+    }
+
+    fun insertmemo(id:Int, memo: String?) {
+        LocationDao.insertmemo(id, memo)
         //Log.d(ContentValues.TAG, "들어간 값" + AllLocations.value.toString())
     }
 

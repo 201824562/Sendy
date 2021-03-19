@@ -1,6 +1,5 @@
 package com.example.sendytoyproject1
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.location.Address
 import android.location.Geocoder
@@ -12,9 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.example.sendytoyproject1.Data.LocationEntity
 import com.example.sendytoyproject1.Data.LocationViewmodel
 import com.example.sendytoyproject1.databinding.FragmentFirstBinding
 import com.google.android.material.snackbar.Snackbar
@@ -111,14 +108,13 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
             nowLng = location.longitude
         }
 
-
         //플로팅 버튼 -> 데이터 기록용                             //추가 필요: 이미 등록된 경우 등록되지 않게 해주어야함.
         sendButton.setOnClickListener { view ->
 
             var geoCoder = Geocoder(context, Locale.getDefault())
-            Log.d(TAG, "주소 잡히는지 확인" + "$nowLat, " + "$nowLng")
+            //Log.d(TAG, "주소 잡히는지 확인" + "$nowLat, " + "$nowLng")
             addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
-            Log.d(TAG, " 주소 뭐 들어왔누 : "  +  addresslist.toString())
+            //Log.d(TAG, " 주소 뭐 들어왔누 : "  +  addresslist.toString())
 
             address = addresslist?.get(0)?.getAddressLine(0)
 
@@ -137,8 +133,13 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
 
             SendButtonClick(view)
         }
-    }
 
+        //현재위치 찾아주는 버튼이다.
+        findlocationButton.setOnClickListener{
+            findLocation()
+        }
+
+    }
 
     private fun getTime(): String? {
         mNow = System.currentTimeMillis()
@@ -149,8 +150,15 @@ class FirstFragment :  Fragment(), OnMapReadyCallback {
     // (데이터바인딩) 플로팅 버튼 온클릭
     fun SendButtonClick(view: View){
         //버튼 눌렀을 때 로직 짜기! (바인딩 된 데이터를 저장해야함)
-        viewModel.insert(LocationItemData(getTime().toString(), address.toString(), 0,false))
+        viewModel.insert(LocationItemData(getTime().toString(), address.toString(), "",0,false))
     }
 
+    fun findLocation(){
+        // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
+        this.naverMap = naverMap
+        naverMap.locationSource = locationSource // 초기 위치 설정(주의:locationSource!= latitude)
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow     //권한 허용시(카메라 따라가게 모드 설정 o)
+
+    }
 
 }
