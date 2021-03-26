@@ -18,8 +18,9 @@
         android:name="com.example.sendytoyproject1.SecondDetailFragment"
         android:label="SecondDetailFragment" >
         <action
-            android:id="@+id/action_secondDetailFragment_to_SecondContentFragment"
-            app:popUpTo="@id/SecondContentFragment" />
+            android:id="@+id/action_secondDetailFragment_pop"
+            app:popUpTo="@id/secondDetailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

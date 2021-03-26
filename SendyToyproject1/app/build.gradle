@@ -44,9 +44,16 @@ android {
 }
 
 dependencies {
-
+    //naver map
     implementation 'com.naver.maps:map-sdk:3.10.2' //Naver map sdk
     implementation("com.google.android.gms:play-services-location:16.0.0") //Naver 현재위치추적
+
+    //kakao map
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     // Room components
     def roomVersion = '2.2.5'

@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1c8bdc58-07a1-432a-b87d-5b5f40c17381" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationEntity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationViewmodel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/Data/LocationViewmodel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/LocationRVAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/LocationRVAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/FirstFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/FirstFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/java/com/example/sendytoyproject1/SecondDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/navigation/navi_graph_second.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SendyToyproject1/app/src/main/res/navigation/navi_graph_second.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

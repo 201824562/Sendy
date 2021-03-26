@@ -21,5 +21,7 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="hgdhknulhp" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />  <!-- 사용자 인터넷 접속 허용 권한 획득-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 사용자 위치 정보 수집 권한 획득 (네트워크와 GPS - ver1) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> <!-- 사용자 위치 정보 수집 권한 획득 (네트워크와 GPS - ver2) -->
 </manifest>

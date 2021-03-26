@@ -106,11 +106,11 @@ class LocationViewmodel(application: Application) : AndroidViewModel(application
 
 
 
-    fun insert(it: LocationItemData)  = viewModelScope.launch(Dispatchers.IO)  { //이것도 itemData로 받아온 후 Entity형식으로 바꿔야 함.
+    fun insert(it: LocationItemData)  = viewModelScope.launch(Dispatchers.IO)  {
         repository.insert(it)
     }
 
-    fun insertmemo(id:Int, memo: String?)  = viewModelScope.launch(Dispatchers.IO)  { //이것도 itemData로 받아온 후 Entity형식으로 바꿔야 함.
+    fun insertmemo(id:Int, memo: String?)  = viewModelScope.launch(Dispatchers.IO)  {
         repository.insertmemo(id, memo)
     }
 

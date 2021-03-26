@@ -12,12 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".FirstFragment">
-
-        <fragment
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/map"
-            android:name="com.naver.maps.map.MapFragment" />
+            android:orientation="vertical">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconifiedByDefault="false"
+                android:queryHint="음식점을 검색하세요."  />
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconifiedByDefault="false"
+                android:name="com.naver.maps.map.MapFragment" />
+        </LinearLayout>
+
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:onClick="@{viewModel::SendButtonClick}"

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.sendytoyproject1.Data.LocationViewmodel
 import com.example.sendytoyproject1.databinding.ContentSecondDetailItemBinding
 import kotlinx.android.synthetic.main.content_second_detail_item.*
@@ -38,6 +39,8 @@ class SecondDetailFragment : Fragment(){
         save_memo_btn.setOnClickListener {
             if (receivedItemdata != null) {
                 viewmodel.insertmemo(receivedItemdata.id, memoview.text.toString())
+                findNavController().navigate(R.id.action_secondDetailFragment_pop)
+
             }
         }
 
